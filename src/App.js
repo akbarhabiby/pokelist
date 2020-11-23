@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import PostList from './PostList'
+import Navbar from './Navbar'
+import PokemonTable from './PokemonTable'
 
 export default class App extends Component {
   constructor(props) {
     super(props)
     // * State
     this.state = {
-      posts: []
+      pokemons: []
     }
   }
 
@@ -15,21 +16,26 @@ export default class App extends Component {
   componentDidMount() {
     axios({
       method: 'GET',
-      url: 'https://jsonplaceholder.typicode.com/posts',
+      url: 'https://pokeapi.co/api/v2/pokemon',
       params: {
-        _limit: 20
+        limit: 20
       }
     })
       .then(({ data }) => {
-        this.setState({ posts: data })
+        const { results } = data
+        this.setState({ pokemons: results })
+        console.log('Fetching Pokemons Completed')
       })
   }
 
   render() {
-    const { posts } = this.state
+    const { pokemons } = this.state
     return (
-      <div className="container mt-5">
-        <PostList posts={posts} />
+      <div>
+        <Navbar />
+        <div className="container mt-5">
+          <PokemonTable pokemons={ pokemons } />
+        </div>
       </div>
     )
   }
