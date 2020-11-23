@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Greeting from './Greeting'
 import Navbar from './Navbar'
 import PokemonTable from './PokemonTable'
 
@@ -31,12 +32,13 @@ export default class App extends Component {
   render() {
     const { pokemons } = this.state
     return (
-      <div>
+      <>
         <Navbar />
         <div className="container mt-5">
+          <Greeting />
           <PokemonTable pokemons={ pokemons } />
         </div>
-      </div>
+      </>
     )
   }
 }

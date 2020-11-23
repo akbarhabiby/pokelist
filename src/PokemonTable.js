@@ -6,7 +6,7 @@ export default class PokemonTable extends Component {
     // * Props
     const { pokemons } = this.props
     return (
-      <table className="table table-hover">
+      <table className="table table-hover text-center" style={{ backgroundColor: '#fff' }}>
         <thead>
           <tr>
             <th scope="col">Pokémon</th>
@@ -15,7 +15,7 @@ export default class PokemonTable extends Component {
           </tr>
         </thead>
         <tbody>
-          { pokemons.map(poke => { return <Pokemon poke={poke} key={poke.name} /> })}
+          { pokemons.map(poke => { return <Pokemon poke={poke} key={poke.name} /> }) }
         </tbody>
       </table>
     )
