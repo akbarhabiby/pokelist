@@ -7,6 +7,7 @@ export default function App() {
   // * State
   const [pokemons, setPokemons] = useState([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
 
   // * Livecycle componentDidMount
   useEffect(() => {
@@ -14,6 +15,8 @@ export default function App() {
       .then(res => {
         if (res.ok) {
           return res.json()
+        } else {
+          return Promise.reject('Failed to Fetch Pokemons')
         }
       })
       .then(({ results }) => {
@@ -21,7 +24,11 @@ export default function App() {
         setLoading(false)
         console.log('Fetching Pokemons Completed')
       })
-      .catch(console.log)
+      .catch(err => {
+        setError(err)
+        setLoading(false)
+        console.log(err)
+      })
   }, [])
 
   if (loading) return (
@@ -33,6 +40,14 @@ export default function App() {
           </div>
         </div>
       </div>
+    </>
+  )
+
+  if (error) return (
+    <>
+      <center><h1>{error}</h1></center>
+      <hr/>
+      <center>Support: <a href="mailto:akbarhabiby@icloud.com">akbarhabiby@icloud.com</a></center>
     </>
   )
 
