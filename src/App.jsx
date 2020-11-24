@@ -1,46 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Navbar from './Navbar'
 import Greeting from './Greeting'
 import PokemonTable from './PokemonTable'
+import useFetchPokemon from './hooks/useFetchPokemon'
 
 export default function App() {
-  // * State
-  const [pokemons, setPokemons] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
-
-  // * Livecycle componentDidMount
-  useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon')
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        } else {
-          return Promise.reject('Failed to Fetch Pokemons')
-        }
-      })
-      .then(({ results }) => {
-        setPokemons(results)
-        setLoading(false)
-        console.log('Fetching Pokemons Completed')
-      })
-      .catch(err => {
-        setError(err)
-        setLoading(false)
-        console.log(err)
-      })
-  }, [])
+  // * Custom Hooks
+  const [pokemons, loading, error] = useFetchPokemon()
 
   if (loading) return (
-    <>
-      <div className="d-flex justify-content-center" style={{ height: 100+'vh'}}>
-        <div className="align-self-center">
-          <div className="spinner-border text-info" role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
+    <div className="d-flex justify-content-center" style={{ height: 100+'vh'}}>
+      <div className="align-self-center">
+        <div className="spinner-border text-info" role="status">
+          <span className="sr-only">Loading...</span>
         </div>
       </div>
-    </>
+    </div>
   )
 
   if (error) return (
