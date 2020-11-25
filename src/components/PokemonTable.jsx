@@ -3,7 +3,7 @@ import Pokemon from './Pokemon'
 
 export default function PokemonTable(props) {
   // * Props
-  const { pokemons } = props
+  const { pokemons, favorites } = props
   return (
     <table className="table table-hover text-center" style={{ backgroundColor: '#fff' }}>
       <thead>
@@ -14,7 +14,7 @@ export default function PokemonTable(props) {
         </tr>
       </thead>
       <tbody>
-        { pokemons.map(poke => <Pokemon poke={poke} key={poke.name} />) }
+        { pokemons.map(poke => <Pokemon poke={poke} key={poke.name} favorites={favorites} />) }
       </tbody>
     </table>
   )
