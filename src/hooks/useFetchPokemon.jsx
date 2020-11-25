@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 
-export default function useFetchPokemon() {
+export default function useFetchPokemon(pokeId = '') {
   // * State
   const [pokemons, setPokemons] = useState([])
+  const [pokemon, setPokemon] = useState({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   const fetchPokemon = () => {
-    fetch('https://pokeapi.co/api/v2/pokemon')
+    fetch('https://pokeapi.co/api/v2/pokemon/' + pokeId)
       .then(res => {
         if (res.ok) {
           return res.json()
@@ -15,8 +16,10 @@ export default function useFetchPokemon() {
           return Promise.reject('Failed to Fetch Pokemons')
         }
       })
-      .then(({ results }) => {
-        setPokemons(results)
+      .then(data => {
+        const { results } = data
+        if (results) setPokemons(results)
+        setPokemon(data)
         console.log('Fetching Pokemons Completed')
       })
       .catch(err => {
@@ -31,5 +34,5 @@ export default function useFetchPokemon() {
     fetchPokemon()
   }, [])
 
-  return [pokemons, loading, error]
+  return { pokemons, pokemon, loading, error }
 }
