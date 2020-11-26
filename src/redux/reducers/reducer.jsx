@@ -11,7 +11,7 @@ export default function reducer(state = initialState, action) {
     case 'SET_LOADING':
       return { ...state, loading: action.payload }
     case 'SET_ERROR':
-      return { ...state, error: action.error }
+      return { ...state, error: action.payload }
     case 'SET_POKEMONS':
       return { ...state, pokemons: action.payload }
     case 'SET_POKEMON':
