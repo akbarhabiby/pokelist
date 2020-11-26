@@ -1,15 +1,16 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { addPokemonToFav } from '../redux/actions/'
+import { addPokemonToFav, setLoading } from '../redux/actions/'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function Pokemon(props) {
   const router = useHistory()
+  const dispatch = useDispatch()
+
   const detailPokemon = id => {
+    dispatch(setLoading())
     router.push(`/pokemon/${id}`)
   }
-
-  const dispatch = useDispatch()
 
   // * Props
   const { poke, favorites } = props

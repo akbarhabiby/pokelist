@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Loading, ErrorPage, Greeting, PokemonTable } from '../components/'
-import { useFetchPokemon } from '../hooks/'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchPokemons } from '../helpers/'
 
 export default function Dashboard() {
   // * Custom Hooks
-  const { pokemons, loading, error } = useFetchPokemon()
+  const dispatch = useDispatch()
+  const { pokemons, loading, error } = useSelector(state => state)
+
+  useEffect(() => {
+    dispatch(fetchPokemons())
+  }, [])
 
   // * Show Loading Spinner
   if (loading) return <Loading />

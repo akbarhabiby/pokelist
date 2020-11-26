@@ -1,1 +1,5 @@
+export { default as setPokemons } from './setPokemons'
+export { default as setPokemon } from './setPokemon'
 export { default as addPokemonToFav } from './addPokemonToFav'
+export { default as setLoading } from './setLoading'
+export { default as setError } from './setError'
