@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { Dashboard, PokemonDetail, PokemonFavorites } from './pages/'
+import { Dashboard, PokemonDetail, PokemonFavorites, SearchPokemon } from './pages/'
 import { Navbar } from './components/'
 
 export default function App() {
@@ -13,6 +13,9 @@ export default function App() {
         </Route>
         <Route path="/pokemon/:pokeId">
           <PokemonDetail />
+        </Route>
+        <Route path="/search">
+          <SearchPokemon />
         </Route>
         <Route path="/">
           <Dashboard />
