@@ -19,7 +19,7 @@ export default function Dashboard() {
 
   return (
     <div className="container mt-5">
-      <Greeting />
+      <Greeting message="Welcome to PokéList" />
       <PokemonTable pokemons={pokemons} />
     </div>
   )

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchOrSearchPokemon } from '../helpers/'
-import { Loading } from '../components/'
+import { Loading, Greeting } from '../components/'
 import { setLoading } from '../redux/actions'
 import debounce from 'lodash.debounce'
 
@@ -25,8 +25,8 @@ export default function SearchPokemon() {
 
   if (!pokemon.name) return (
     <div className="container mt-5">
+      <Greeting message="Search Pokémon" />
       <div className="form-group">
-        <label>Search Pokémon</label>
         <input
           type="text"
           className="form-control"
@@ -42,8 +42,8 @@ export default function SearchPokemon() {
 
   return (
     <div className="container mt-5">
+      <h2 className="text-center mb-5" style={{ color: '#14A3B8' }}>Search Pokémon</h2>
       <div className="form-group">
-        <label>Search Pokémon</label>
         <input
           type="text"
           className="form-control"
@@ -51,16 +51,20 @@ export default function SearchPokemon() {
           onChange={e => handleKeyword(e.target.value)}>
         </input>
       </div>
-      <div className="text-center">
-        <img src={`https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`} alt={pokemon.name} style={{ width: '200px' }} />
-        <div>
-          Name: {pokemon.name}
-        </div>
-        <div>
-          Types: {pokemon.types.map(type => <span key={type.slot} className="btn btn-success" style={{ marginRight: '5px' }}>{type.type.name}</span>)}
-        </div>
-        <div>
-          Abilities: {pokemon.abilities.map(abilitiy => <span key={abilitiy.slot} className="btn btn-primary" style={{ marginRight: '5px' }}>{abilitiy.ability.name}</span>)}
+      <div className="d-flex justify-content-center">
+        <div className="card" style={{ width: '18rem' }}>
+          <img src={`https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`} className="card-img-top" alt={pokemon.name} style={{ width: '200px', padding: '15px' }} />
+          <div className="card-body">
+            <h5 className="card-title">{pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}</h5>
+            <p className="card-text">Types</p>
+            <div>
+              {pokemon.types.map(type => <span key={type.slot} className="btn btn-success" style={{ marginRight: '5px' }}>{type.type.name[0].toUpperCase() + type.type.name.slice(1)}</span>)}
+            </div>
+            <p className="pt-2">Abilities</p>
+            <div>
+              {pokemon.abilities.map(abilitiy => <span key={abilitiy.slot} className="btn btn-primary" style={{ marginRight: '5px' }}>{abilitiy.ability.name[0].toUpperCase() + abilitiy.ability.name.slice(1)}</span>)}
+            </div>
+          </div>
         </div>
       </div>
     </div>
