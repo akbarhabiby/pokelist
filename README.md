@@ -1,3 +1,8 @@
+# react-challenge
+
+**Demo URL** https://pokemon-list-akbarhabiby.web.app/
+> Deployed on Nov 26 2020
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
